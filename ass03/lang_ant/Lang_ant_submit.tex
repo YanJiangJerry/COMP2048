@@ -1,0 +1,29 @@
+% !TEX options=--shell-escape 
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pdfpages}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{minted}
+% \usemintedstyle{manni}
+
+\pagestyle{empty}
+
+\parindent = 0mm
+\unitlength=3mm
+
+\setlength{\textwidth}{183.0truemm}
+\setlength{\textheight}{245.0truemm}
+\setlength{\oddsidemargin}{-8.0mm}
+\setlength{\evensidemargin}{-8.0mm}
+\setlength{\topmargin}{-20.5truemm}
+
+
+\def \qed {\hfill $\Box$}
+
+\begin{document}
+\inputminted[]{python}{lang_ant.py}
+\end{document}

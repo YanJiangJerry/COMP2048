@@ -1,0 +1,143 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{}*\PYGZhy{} coding: utf\PYGZhy{}8 \PYGZhy{}*\PYGZhy{}}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{Langton\PYGZsq{}s Ant Simulation}
+
+\PYG{l+s+sd}{Created on 2021\PYGZhy{}04\PYGZhy{}25}
+
+\PYG{l+s+sd}{@author: Richard Wainwright, 40126812}
+
+\PYG{l+s+sd}{Langton\PYGZsq{}s Ant is Turing complete because the ant can move back and forth}
+\PYG{l+s+sd}{and can read and write.  Using this behaviour you can set up an initial}
+\PYG{l+s+sd}{state for the ant to simulate logic gates and have the ant run any program}
+\PYG{l+s+sd}{for you.}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+\PYG{k+kn}{import} \PYG{n+nn}{matplotlib.pyplot} \PYG{k}{as} \PYG{n+nn}{plt}
+\PYG{k+kn}{import} \PYG{n+nn}{matplotlib.animation} \PYG{k}{as} \PYG{n+nn}{animation}
+
+
+\PYG{k}{class} \PYG{n+nc}{Ant}\PYG{p}{:}
+    \PYG{l+s+sd}{\PYGZsq{}\PYGZsq{}\PYGZsq{}}
+\PYG{l+s+sd}{    Ant object to interact with lattice}
+\PYG{l+s+sd}{    \PYGZsq{}\PYGZsq{}\PYGZsq{}}
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{direction}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{direction} \PYG{o}{=} \PYG{n}{direction}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{x} \PYG{o}{=} \PYG{n}{x}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{y} \PYG{o}{=} \PYG{n}{y}
+
+    \PYG{k}{def} \PYG{n+nf}{turn\PYGZus{}right}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{direction} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+            \PYG{l+s+s1}{\PYGZsq{}N\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}E\PYGZsq{}}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}E\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}S\PYGZsq{}}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}S\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}W\PYGZsq{}}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}W\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}N\PYGZsq{}}
+        \PYG{p}{\PYGZcb{}[}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{direction}\PYG{p}{]}
+
+    \PYG{k}{def} \PYG{n+nf}{turn\PYGZus{}left}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{direction} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+            \PYG{l+s+s1}{\PYGZsq{}N\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}W\PYGZsq{}}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}E\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}N\PYGZsq{}}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}S\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}E\PYGZsq{}}\PYG{p}{,}
+            \PYG{l+s+s1}{\PYGZsq{}W\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}S\PYGZsq{}}
+        \PYG{p}{\PYGZcb{}[}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{direction}\PYG{p}{]}
+
+    \PYG{k}{def} \PYG{n+nf}{move}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{direction} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}N\PYGZsq{}}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{y} \PYG{o}{+=} \PYG{l+m+mi}{1}
+        \PYG{k}{elif} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{direction} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}E\PYGZsq{}}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{x} \PYG{o}{+=} \PYG{l+m+mi}{1}
+        \PYG{k}{elif} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{direction} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}S\PYGZsq{}}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{y} \PYG{o}{\PYGZhy{}=} \PYG{l+m+mi}{1}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{x} \PYG{o}{\PYGZhy{}=} \PYG{l+m+mi}{1}
+
+
+\PYG{k}{class} \PYG{n+nc}{LangAnt}\PYG{p}{:}
+    \PYG{l+s+sd}{\PYGZsq{}\PYGZsq{}\PYGZsq{}}
+\PYG{l+s+sd}{    Object for lattice to demonstrate Langton\PYGZsq{}s Ant}
+\PYG{l+s+sd}{    \PYGZsq{}\PYGZsq{}\PYGZsq{}}
+
+    \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{ant}\PYG{p}{,} \PYG{n}{rules}\PYG{p}{,} \PYG{n}{N}\PYG{o}{=}\PYG{l+m+mi}{256}\PYG{p}{,} \PYG{n}{finite}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,} \PYG{n}{fastMode}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{grid} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{((}\PYG{n}{N}\PYG{p}{,} \PYG{n}{N}\PYG{p}{),} \PYG{n}{np}\PYG{o}{.}\PYG{n}{uint}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{finite} \PYG{o}{=} \PYG{n}{finite}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{fastMode} \PYG{o}{=} \PYG{n}{fastMode}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{N} \PYG{o}{=} \PYG{n}{N}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant} \PYG{o}{=} \PYG{n}{ant}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{rules} \PYG{o}{=} \PYG{n}{rules}
+
+    \PYG{k}{def} \PYG{n+nf}{getGrid}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{grid}
+
+    \PYG{k}{def} \PYG{n+nf}{step}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
+        \PYG{l+s+sd}{\PYGZsq{}\PYGZsq{}\PYGZsq{}}
+\PYG{l+s+sd}{        Have the ant turn and move according to the rules}
+\PYG{l+s+sd}{        \PYGZsq{}\PYGZsq{}\PYGZsq{}}
+        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0} \PYG{o+ow}{or} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{y} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0} \PYG{o+ow}{or} \PYGZbs{}
+                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{x} \PYG{o}{\PYGZgt{}=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{N} \PYG{o+ow}{or} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{y} \PYG{o}{\PYGZgt{}=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{N}\PYG{p}{:}
+            \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{grid}
+
+        \PYG{n}{new\PYGZus{}grid} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{getGrid}\PYG{p}{()}
+
+        \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{rules}\PYG{p}{[}\PYG{n}{new\PYGZus{}grid}\PYG{p}{[}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{x}\PYG{p}{][}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{y}\PYG{p}{]]} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}R\PYGZsq{}}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{turn\PYGZus{}right}\PYG{p}{()}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{turn\PYGZus{}left}\PYG{p}{()}
+
+        \PYG{n}{new\PYGZus{}grid}\PYG{p}{[}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{x}\PYG{p}{][}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{y}\PYG{p}{]} \PYG{o}{=} \PYGZbs{}
+            \PYG{p}{(}\PYG{n}{new\PYGZus{}grid}\PYG{p}{[}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{x}\PYG{p}{][}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{y}\PYG{p}{]} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{rules}\PYG{p}{)}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{ant}\PYG{o}{.}\PYG{n}{move}\PYG{p}{()}
+
+
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{rules strings: LR = basic ant}
+\PYG{l+s+sd}{               RLR = Chaos}
+\PYG{l+s+sd}{               LRRRRRLLR = fills grid}
+\PYG{l+s+sd}{               RLRLRLRLRLR = quicker highway}
+\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{} get user input to create dictionary of ant movement rules}
+\PYG{n}{accept} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}RL\PYGZdq{}}
+\PYG{n}{rule\PYGZus{}string} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}
+\PYG{k}{while} \PYG{n}{rule\PYGZus{}string} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}} \PYG{o+ow}{or} \PYG{o+ow}{not} \PYG{n+nb}{all}\PYG{p}{(}\PYG{n}{c} \PYG{o+ow}{in} \PYG{n}{accept} \PYG{k}{for} \PYG{n}{c} \PYG{o+ow}{in} \PYG{n}{rule\PYGZus{}string}\PYG{p}{):}
+    \PYG{n}{rule\PYGZus{}string} \PYG{o}{=} \PYG{n+nb}{input}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Enter rule string: \PYGZdq{}}\PYG{p}{)}
+
+\PYG{n}{rules} \PYG{o}{=} \PYG{n+nb}{dict}\PYG{p}{((}\PYG{n}{k}\PYG{p}{,} \PYG{n}{v}\PYG{p}{)} \PYG{k}{for} \PYG{n}{k}\PYG{p}{,} \PYG{n}{v} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n}{rule\PYGZus{}string}\PYG{p}{))}
+\PYG{n}{num\PYGZus{}rules} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{rule\PYGZus{}string}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} create ant and lattice}
+\PYG{n}{N} \PYG{o}{=} \PYG{l+m+mi}{128}
+\PYG{n}{midpoint} \PYG{o}{=} \PYG{n}{N} \PYG{o}{//} \PYG{l+m+mi}{2}
+\PYG{n}{ant} \PYG{o}{=} \PYG{n}{Ant}\PYG{p}{(}\PYG{n}{midpoint}\PYG{p}{,} \PYG{n}{midpoint}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}W\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{lattice} \PYG{o}{=} \PYG{n}{LangAnt}\PYG{p}{(}\PYG{n}{ant}\PYG{p}{,} \PYG{n}{rules}\PYG{p}{,} \PYG{n}{N}\PYG{p}{)}
+
+\PYG{n}{cells} \PYG{o}{=} \PYG{n}{lattice}\PYG{o}{.}\PYG{n}{getGrid}\PYG{p}{()}  \PYG{c+c1}{\PYGZsh{} initial state}
+
+\PYG{c+c1}{\PYGZsh{} plot cells}
+\PYG{n}{fig} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{figure}\PYG{p}{()}
+
+\PYG{n}{img} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{imshow}\PYG{p}{(}\PYG{n}{cells}\PYG{p}{,} \PYG{n}{cmap}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}gnuplot2\PYGZdq{}}\PYG{p}{,} \PYG{n}{vmin}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{vmax}\PYG{o}{=}\PYG{p}{(}\PYG{n}{num\PYGZus{}rules} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{),}
+                 \PYG{n}{animated}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+
+
+\PYG{k}{def} \PYG{n+nf}{animate}\PYG{p}{(}\PYG{n}{i}\PYG{p}{):}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}perform animation step\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{k}{global} \PYG{n}{lattice}
+
+    \PYG{n}{lattice}\PYG{o}{.}\PYG{n}{step}\PYG{p}{()}
+    \PYG{n}{cells\PYGZus{}updated} \PYG{o}{=} \PYG{n}{lattice}\PYG{o}{.}\PYG{n}{getGrid}\PYG{p}{()}
+
+    \PYG{n}{img}\PYG{o}{.}\PYG{n}{set\PYGZus{}array}\PYG{p}{(}\PYG{n}{cells\PYGZus{}updated}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{img}\PYG{p}{,}
+
+
+\PYG{n}{interval} \PYG{o}{=} \PYG{l+m+mi}{0}  \PYG{c+c1}{\PYGZsh{} ms}
+
+\PYG{c+c1}{\PYGZsh{} animate 24 frames with interval, calling animate function at each frame}
+\PYG{n}{ani} \PYG{o}{=} \PYG{n}{animation}\PYG{o}{.}\PYG{n}{FuncAnimation}\PYG{p}{(}\PYG{n}{fig}\PYG{p}{,} \PYG{n}{animate}\PYG{p}{,} \PYG{n}{frames}\PYG{o}{=}\PYG{l+m+mi}{24}\PYG{p}{,} \PYG{n}{interval}\PYG{o}{=}\PYG{n}{interval}\PYG{p}{,}
+                              \PYG{n}{blit}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{()}
+\end{Verbatim}

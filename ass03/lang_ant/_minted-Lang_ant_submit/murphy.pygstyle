@@ -1,0 +1,101 @@
+
+\makeatletter
+\def\PYGmurphy@reset{\let\PYGmurphy@it=\relax \let\PYGmurphy@bf=\relax%
+    \let\PYGmurphy@ul=\relax \let\PYGmurphy@tc=\relax%
+    \let\PYGmurphy@bc=\relax \let\PYGmurphy@ff=\relax}
+\def\PYGmurphy@tok#1{\csname PYGmurphy@tok@#1\endcsname}
+\def\PYGmurphy@toks#1+{\ifx\relax#1\empty\else%
+    \PYGmurphy@tok{#1}\expandafter\PYGmurphy@toks\fi}
+\def\PYGmurphy@do#1{\PYGmurphy@bc{\PYGmurphy@tc{\PYGmurphy@ul{%
+    \PYGmurphy@it{\PYGmurphy@bf{\PYGmurphy@ff{#1}}}}}}}
+\def\PYGmurphy#1#2{\PYGmurphy@reset\PYGmurphy@toks#1+\relax+\PYGmurphy@do{#2}}
+
+\@namedef{PYGmurphy@tok@w}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\@namedef{PYGmurphy@tok@c}{\let\PYGmurphy@it=\textit\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PYGmurphy@tok@cp}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.33,0.47,0.60}{##1}}}
+\@namedef{PYGmurphy@tok@cs}{\let\PYGmurphy@bf=\textbf\let\PYGmurphy@it=\textit\def\PYGmurphy@tc##1{\textcolor[rgb]{0.80,0.00,0.00}{##1}}}
+\@namedef{PYGmurphy@tok@k}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.13,0.53,0.60}{##1}}}
+\@namedef{PYGmurphy@tok@kp}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.53,1.00}{##1}}}
+\@namedef{PYGmurphy@tok@kt}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.40,1.00}{##1}}}
+\@namedef{PYGmurphy@tok@o}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.20,0.20,0.20}{##1}}}
+\@namedef{PYGmurphy@tok@ow}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.00,0.00}{##1}}}
+\@namedef{PYGmurphy@tok@nb}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.47,0.13}{##1}}}
+\@namedef{PYGmurphy@tok@nf}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.33,0.93,0.87}{##1}}}
+\@namedef{PYGmurphy@tok@nc}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.93,0.60,0.93}{##1}}}
+\@namedef{PYGmurphy@tok@nn}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.05,0.52,0.71}{##1}}}
+\@namedef{PYGmurphy@tok@ne}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\@namedef{PYGmurphy@tok@nv}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.20,0.40}{##1}}}
+\@namedef{PYGmurphy@tok@vi}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.67,0.67,1.00}{##1}}}
+\@namedef{PYGmurphy@tok@vc}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.80,0.80,1.00}{##1}}}
+\@namedef{PYGmurphy@tok@vg}{\def\PYGmurphy@tc##1{\textcolor[rgb]{1.00,0.53,0.27}{##1}}}
+\@namedef{PYGmurphy@tok@no}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.33,0.93,0.87}{##1}}}
+\@namedef{PYGmurphy@tok@nl}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.60,0.47,0.00}{##1}}}
+\@namedef{PYGmurphy@tok@ni}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\@namedef{PYGmurphy@tok@na}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.00,0.47}{##1}}}
+\@namedef{PYGmurphy@tok@nt}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.47,0.00}{##1}}}
+\@namedef{PYGmurphy@tok@nd}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.33,0.33,0.33}{##1}}}
+\@namedef{PYGmurphy@tok@s}{\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.88,0.88,1.00}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@sc}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.53,0.53,1.00}{##1}}}
+\@namedef{PYGmurphy@tok@sd}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.87,0.27,0.13}{##1}}}
+\@namedef{PYGmurphy@tok@si}{\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.93,0.93,0.93}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@se}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.88,0.88,1.00}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@sr}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.00,0.00}{##1}}\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.88,0.88,1.00}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@ss}{\def\PYGmurphy@tc##1{\textcolor[rgb]{1.00,0.80,0.53}{##1}}}
+\@namedef{PYGmurphy@tok@sx}{\def\PYGmurphy@tc##1{\textcolor[rgb]{1.00,0.53,0.53}{##1}}\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.88,0.88,1.00}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@m}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.00,0.93}{##1}}}
+\@namedef{PYGmurphy@tok@mi}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.40,1.00}{##1}}}
+\@namedef{PYGmurphy@tok@mf}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.00,0.93}{##1}}}
+\@namedef{PYGmurphy@tok@mh}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.33,0.53}{##1}}}
+\@namedef{PYGmurphy@tok@mo}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.27,0.00,0.93}{##1}}}
+\@namedef{PYGmurphy@tok@gh}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PYGmurphy@tok@gu}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\@namedef{PYGmurphy@tok@gd}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\@namedef{PYGmurphy@tok@gi}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\@namedef{PYGmurphy@tok@gr}{\def\PYGmurphy@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\@namedef{PYGmurphy@tok@ge}{\let\PYGmurphy@it=\textit}
+\@namedef{PYGmurphy@tok@gs}{\let\PYGmurphy@bf=\textbf}
+\@namedef{PYGmurphy@tok@gp}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.78,0.36,0.04}{##1}}}
+\@namedef{PYGmurphy@tok@go}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\@namedef{PYGmurphy@tok@gt}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\@namedef{PYGmurphy@tok@err}{\def\PYGmurphy@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{1.00,0.67,0.67}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@kc}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.13,0.53,0.60}{##1}}}
+\@namedef{PYGmurphy@tok@kd}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.13,0.53,0.60}{##1}}}
+\@namedef{PYGmurphy@tok@kn}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.13,0.53,0.60}{##1}}}
+\@namedef{PYGmurphy@tok@kr}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.13,0.53,0.60}{##1}}}
+\@namedef{PYGmurphy@tok@bp}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.47,0.13}{##1}}}
+\@namedef{PYGmurphy@tok@fm}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.33,0.93,0.87}{##1}}}
+\@namedef{PYGmurphy@tok@vm}{\def\PYGmurphy@tc##1{\textcolor[rgb]{0.00,0.20,0.40}{##1}}}
+\@namedef{PYGmurphy@tok@sa}{\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.88,0.88,1.00}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@sb}{\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.88,0.88,1.00}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@dl}{\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.88,0.88,1.00}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@s2}{\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.88,0.88,1.00}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@sh}{\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.88,0.88,1.00}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@s1}{\def\PYGmurphy@bc##1{{\setlength{\fboxsep}{0pt}\colorbox[rgb]{0.88,0.88,1.00}{\strut ##1}}}}
+\@namedef{PYGmurphy@tok@mb}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.00,0.93}{##1}}}
+\@namedef{PYGmurphy@tok@il}{\let\PYGmurphy@bf=\textbf\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.40,1.00}{##1}}}
+\@namedef{PYGmurphy@tok@ch}{\let\PYGmurphy@it=\textit\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PYGmurphy@tok@cm}{\let\PYGmurphy@it=\textit\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PYGmurphy@tok@cpf}{\let\PYGmurphy@it=\textit\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PYGmurphy@tok@c1}{\let\PYGmurphy@it=\textit\def\PYGmurphy@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+
+\def\PYGmurphyZbs{\char`\\}
+\def\PYGmurphyZus{\char`\_}
+\def\PYGmurphyZob{\char`\{}
+\def\PYGmurphyZcb{\char`\}}
+\def\PYGmurphyZca{\char`\^}
+\def\PYGmurphyZam{\char`\&}
+\def\PYGmurphyZlt{\char`\<}
+\def\PYGmurphyZgt{\char`\>}
+\def\PYGmurphyZsh{\char`\#}
+\def\PYGmurphyZpc{\char`\%}
+\def\PYGmurphyZdl{\char`\$}
+\def\PYGmurphyZhy{\char`\-}
+\def\PYGmurphyZsq{\char`\'}
+\def\PYGmurphyZdq{\char`\"}
+\def\PYGmurphyZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYGmurphyZat{@}
+\def\PYGmurphyZlb{[}
+\def\PYGmurphyZrb{]}
+\makeatother
+
